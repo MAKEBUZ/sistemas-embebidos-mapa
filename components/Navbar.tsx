@@ -20,15 +20,6 @@ export default function Navbar() {
             <li className="hover:text-brand-secondary-light transition-colors">
               <Link href="/">Inicio</Link>
             </li>
-            <li className="hover:text-brand-secondary-light transition-colors">
-              <Link href="/fundamentos">Fundamentos</Link>
-            </li>
-            <li className="hover:text-brand-secondary-light transition-colors">
-              <Link href="/tiempo-real">Tiempo Real</Link>
-            </li>
-            <li className="hover:text-brand-secondary-light transition-colors">
-              <Link href="/aplicaciones">Aplicaciones</Link>
-            </li>
             <li>
               <button 
                 onClick={() => setIsDrawerOpen(true)}

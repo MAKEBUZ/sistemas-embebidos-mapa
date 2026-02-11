@@ -6,8 +6,73 @@ import data from './texto.json';
 import { useCallback } from 'react';
 
 // Constants for layout
-const MOMENT_SPACING = 1200;
-const TOPIC_RADIUS = 350;
+const MOMENT_SPACING = 1600;
+const NODE_WIDTH = 280; // Match the style width
+const NODE_HEIGHT = 180; // Approximate height for summary + padding
+const GAP = 80;
+
+// Helper to check for collisions
+const checkCollision = (n1: Node, n2: Node) => {
+  const w1 = parseInt(n1.style?.width as string || '250');
+  const h1 = NODE_HEIGHT;
+  const w2 = parseInt(n2.style?.width as string || '250');
+  const h2 = NODE_HEIGHT;
+
+  return (
+    n1.position.x < n2.position.x + w2 + GAP &&
+    n1.position.x + w1 + GAP > n2.position.x &&
+    n1.position.y < n2.position.y + h2 + GAP &&
+    n1.position.y + h1 + GAP > n2.position.y
+  );
+};
+
+// Collision resolver (Validator)
+const resolveCollisions = (nodes: Node[]) => {
+  const adjustedNodes = [...nodes];
+  const iterations = 100; 
+  
+  for (let k = 0; k < iterations; k++) {
+    let moved = false;
+    for (let i = 0; i < adjustedNodes.length; i++) {
+      for (let j = i + 1; j < adjustedNodes.length; j++) {
+        const n1 = adjustedNodes[i];
+        const n2 = adjustedNodes[j];
+        
+        // Don't move the root node (index 0 usually)
+        if (n1.id === 'root') continue;
+
+        if (checkCollision(n1, n2)) {
+          // Calculate vector between centers
+          let dx = (n1.position.x + NODE_WIDTH/2) - (n2.position.x + NODE_WIDTH/2);
+          let dy = (n1.position.y + NODE_HEIGHT/2) - (n2.position.y + NODE_HEIGHT/2);
+          
+          if (dx === 0 && dy === 0) {
+             dx = Math.random() - 0.5;
+             dy = Math.random() - 0.5;
+          }
+
+          const distance = Math.sqrt(dx * dx + dy * dy) || 1;
+          
+          // Force stronger separation
+          const moveX = (dx / distance) * 10;
+          const moveY = (dy / distance) * 10;
+
+          if (n1.id !== 'root') {
+            n1.position.x += moveX;
+            n1.position.y += moveY;
+          }
+          if (n2.id !== 'root') {
+            n2.position.x -= moveX;
+            n2.position.y -= moveY;
+          }
+          moved = true;
+        }
+      }
+    }
+    if (!moved) break;
+  }
+  return adjustedNodes;
+};
 
 // Helper to render summary content
 const renderSummary = (topic: any) => (
@@ -126,10 +191,19 @@ data.moments.forEach((moment, mIndex) => {
 
   // Calculate Topics Layout (Semi-circle / Fan below the Moment)
   const totalTopics = moment.topics.length;
-  // Spread topics from angle 0 (right) to 180 (left) - actually downwards: 30 to 150 degrees?
-  // Let's go 20 degrees to 160 degrees for full bottom spread.
-  const startAngle = 10;
-  const endAngle = 170;
+  // Calculate required perimeter: Width of all nodes + Gaps
+  const requiredPerimeter = totalTopics * (NODE_WIDTH + GAP);
+  
+  // Available angle (30 to 150 degrees = 120 degrees = ~2.1 rad)
+  // Narrower cone to prevent horizontal overlap with adjacent moments
+  const startAngle = 30;
+  const endAngle = 150;
+  const availableAngleRad = (endAngle - startAngle) * (Math.PI / 180);
+
+  // Dynamic radius based on perimeter
+  const minRadius = 400; // Increased min radius
+  const calculatedRadius = Math.max(minRadius, requiredPerimeter / availableAngleRad);
+
   const angleStep = (endAngle - startAngle) / (totalTopics - 1);
 
   moment.topics.forEach((topic, tIndex) => {
@@ -137,8 +211,7 @@ data.moments.forEach((moment, mIndex) => {
     
     // Calculate position based on angle
     const angleRad = (startAngle + (tIndex * angleStep)) * (Math.PI / 180);
-    const offsetX = Math.cos(angleRad) * TOPIC_RADIUS; // cos(0) = 1 (Right)
-    const offsetY = Math.sin(angleRad) * TOPIC_RADIUS; // sin(90) = 1 (Down)
+    // Removed old unused calculation
     
     // Since we want them "below", we map 0-180 to bottom half. 
     // cos goes 1 -> 0 -> -1 (Right -> Center -> Left)
@@ -149,8 +222,8 @@ data.moments.forEach((moment, mIndex) => {
     const currentAngle = 170 - (tIndex * angleStep); 
     const currentRad = currentAngle * (Math.PI / 180);
 
-    const tX = momentX + (Math.cos(currentRad) * TOPIC_RADIUS);
-    const tY = momentY + (Math.sin(currentRad) * TOPIC_RADIUS);
+    const tX = momentX + (Math.cos(currentRad) * calculatedRadius);
+    const tY = momentY + (Math.sin(currentRad) * calculatedRadius);
     
     // Topic Node
     initialNodes.push({
@@ -186,8 +259,11 @@ data.moments.forEach((moment, mIndex) => {
   });
 });
 
+// Apply collision resolution
+const resolvedNodes = resolveCollisions(initialNodes);
+
 export default function MapaConceptualPage() {
-  const [nodes, setNodes, onNodesChange] = useNodesState(initialNodes);
+  const [nodes, setNodes, onNodesChange] = useNodesState(resolvedNodes);
   const [edges, setEdges, onEdgesChange] = useEdgesState(initialEdges);
 
   const onNodeClick: NodeMouseHandler = useCallback((event, node) => {
