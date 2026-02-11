@@ -6,16 +6,15 @@ import data from './texto.json';
 import { useCallback } from 'react';
 
 // Constants for layout
-const NODE_WIDTH = 250;
-const X_SPACING = 400;
-const Y_SPACING = 200;
+const MOMENT_SPACING = 1200;
+const TOPIC_RADIUS = 350;
 
 // Helper to render summary content
 const renderSummary = (topic: any) => (
-  <div className="text-left p-1 group">
-    <div className="font-bold text-sm mb-1">{topic.title}</div>
+  <div className="text-left p-1 group h-full flex flex-col justify-center">
+    <div className="font-bold text-sm mb-1 text-gray-800">{topic.title}</div>
     <div className="text-xs text-gray-500 line-clamp-2">{topic.definition}</div>
-    <div className="text-[10px] text-brand-secondary mt-2 text-center font-medium opacity-0 group-hover:opacity-100 transition-opacity">
+    <div className="text-[10px] text-indigo-500 mt-2 text-center font-medium opacity-0 group-hover:opacity-100 transition-opacity">
       Click para ver detalles
     </div>
   </div>
@@ -25,31 +24,34 @@ const renderSummary = (topic: any) => (
 const renderFull = (topic: any) => (
    <div className="text-left p-3">
     {topic.imageUrl && (
-      <div className="relative w-full h-32 mb-3 rounded-md overflow-hidden bg-gray-100">
+      <div className="relative w-full h-40 mb-3 rounded-lg overflow-hidden shadow-sm">
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img 
           src={topic.imageUrl} 
           alt={topic.title}
-          className="w-full h-full object-cover"
+          className="w-full h-full object-cover transition-transform hover:scale-105 duration-500"
         />
       </div>
     )}
-    <div className="font-bold text-lg text-brand-primary mb-2 border-b border-gray-100 pb-2">{topic.title}</div>
-    <div className="text-sm text-gray-700 mb-4">{topic.definition}</div>
+    <div className="font-bold text-lg text-indigo-700 mb-2 border-b border-indigo-100 pb-2">{topic.title}</div>
+    <div className="text-sm text-gray-700 mb-4 leading-relaxed">{topic.definition}</div>
     
-    <div className="mb-3">
-      <span className="text-xs font-bold text-brand-secondary uppercase tracking-wider block mb-2">Características</span>
-      <ul className="list-disc pl-4 space-y-1">
+    <div className="mb-3 bg-indigo-50 p-3 rounded-lg">
+      <span className="text-xs font-bold text-indigo-600 uppercase tracking-wider block mb-2">Características</span>
+      <ul className="space-y-1">
         {topic.characteristics.map((char: string, i: number) => (
-          <li key={i} className="text-xs text-gray-600">{char}</li>
+          <li key={i} className="text-xs text-gray-700 flex items-start">
+            <span className="mr-2 text-indigo-400">•</span>
+            {char}
+          </li>
         ))}
       </ul>
     </div>
 
     {topic.example && (
-      <div className="mt-4 pt-3 border-t border-gray-100 bg-gray-50 -mx-3 -mb-3 p-3 rounded-b-lg">
-         <div className="text-xs text-gray-600">
-          <span className="font-bold text-brand-accent">💡 Ejemplo: </span>
+      <div className="mt-4 pt-3 border-t border-gray-100">
+         <div className="text-xs text-gray-600 italic bg-amber-50 p-2 rounded border border-amber-100">
+          <span className="font-bold text-amber-600 not-italic">💡 Ejemplo: </span>
           {topic.example.replace('Ejemplo: ', '')}
          </div>
       </div>
@@ -64,27 +66,33 @@ const initialEdges: Edge[] = [];
 const rootId = 'root';
 initialNodes.push({
   id: rootId,
-  position: { x: 0, y: 0 }, // Will be centered later
+  position: { x: 0, y: -400 }, // Moved up
   data: { label: data.title },
   type: 'input',
   sourcePosition: Position.Bottom,
   style: { 
-    background: '#4338ca', 
+    background: 'linear-gradient(135deg, #4f46e5 0%, #3730a3 100%)', 
     color: 'white', 
-    border: 'none', 
-    fontWeight: 'bold', 
-    width: 200,
-    borderRadius: '8px',
-    boxShadow: '0 4px 6px -1px rgb(0 0 0 / 0.1)'
+    border: '2px solid #312e81', 
+    fontWeight: '800', 
+    fontSize: '18px',
+    width: 280,
+    padding: '15px',
+    borderRadius: '12px',
+    boxShadow: '0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -2px rgb(0 0 0 / 0.05)',
+    textTransform: 'uppercase',
+    letterSpacing: '1px'
   },
 });
 
-let currentX = 0;
-
 data.moments.forEach((moment, mIndex) => {
   const momentId = `moment-${mIndex}`;
-  const momentX = currentX;
-  const momentY = Y_SPACING;
+  
+  // Calculate Moment Position (Horizontal distribution)
+  // Center is 0. Left is -Spacing. Right is +Spacing.
+  // If 3 moments: -Spacing, 0, +Spacing.
+  const momentX = (mIndex - 1) * MOMENT_SPACING;
+  const momentY = 0;
 
   // Moment Node
   initialNodes.push({
@@ -94,12 +102,15 @@ data.moments.forEach((moment, mIndex) => {
     sourcePosition: Position.Bottom,
     targetPosition: Position.Top,
     style: { 
-      background: '#0d9488', 
+      background: 'linear-gradient(135deg, #0d9488 0%, #115e59 100%)', 
       color: 'white', 
-      border: 'none', 
-      fontWeight: '600',
-      width: 250,
-      borderRadius: '8px'
+      border: '2px solid #134e4a', 
+      fontWeight: '700',
+      width: 280,
+      padding: '12px',
+      borderRadius: '12px',
+      boxShadow: '0 4px 6px -1px rgb(0 0 0 / 0.1)',
+      zIndex: 10
     },
   });
 
@@ -108,33 +119,59 @@ data.moments.forEach((moment, mIndex) => {
     id: `e-${rootId}-${momentId}`,
     source: rootId,
     target: momentId,
-    type: 'smoothstep',
+    type: 'bezier', // Curved lines
     animated: true,
-    style: { stroke: '#94a3b8', strokeWidth: 2 },
+    style: { stroke: '#6366f1', strokeWidth: 3, opacity: 0.6 },
   });
+
+  // Calculate Topics Layout (Semi-circle / Fan below the Moment)
+  const totalTopics = moment.topics.length;
+  // Spread topics from angle 0 (right) to 180 (left) - actually downwards: 30 to 150 degrees?
+  // Let's go 20 degrees to 160 degrees for full bottom spread.
+  const startAngle = 10;
+  const endAngle = 170;
+  const angleStep = (endAngle - startAngle) / (totalTopics - 1);
 
   moment.topics.forEach((topic, tIndex) => {
     const topicId = `topic-${mIndex}-${tIndex}`;
-    const topicY = momentY + Y_SPACING + (tIndex * 150); // Vertical list for topics
+    
+    // Calculate position based on angle
+    const angleRad = (startAngle + (tIndex * angleStep)) * (Math.PI / 180);
+    const offsetX = Math.cos(angleRad) * TOPIC_RADIUS; // cos(0) = 1 (Right)
+    const offsetY = Math.sin(angleRad) * TOPIC_RADIUS; // sin(90) = 1 (Down)
+    
+    // Since we want them "below", we map 0-180 to bottom half. 
+    // cos goes 1 -> 0 -> -1 (Right -> Center -> Left)
+    // sin goes 0 -> 1 -> 0 (Top -> Bottom -> Top)
+    // We want Left -> Right or Right -> Left?
+    // Let's map so tIndex 0 is Left, Last is Right.
+    // 170 deg (Left) to 10 deg (Right).
+    const currentAngle = 170 - (tIndex * angleStep); 
+    const currentRad = currentAngle * (Math.PI / 180);
+
+    const tX = momentX + (Math.cos(currentRad) * TOPIC_RADIUS);
+    const tY = momentY + (Math.sin(currentRad) * TOPIC_RADIUS);
     
     // Topic Node
     initialNodes.push({
       id: topicId,
-      position: { x: momentX, y: topicY },
+      position: { x: tX, y: tY },
       data: { 
         label: renderSummary(topic),
         topicData: topic, // Store raw data for expansion
         expanded: false
       },
-      targetPosition: Position.Top,
+      targetPosition: Position.Top, // Actually connects from center usually
       style: { 
         width: 250,
-        background: 'white',
-        border: '1px solid #e2e8f0',
-        borderRadius: '8px',
+        background: 'rgba(255, 255, 255, 0.95)',
+        border: '1px solid #cbd5e1',
+        borderRadius: '16px',
         fontSize: '12px',
         cursor: 'pointer',
-        transition: 'all 0.3s ease'
+        transition: 'all 0.4s cubic-bezier(0.4, 0, 0.2, 1)',
+        backdropFilter: 'blur(8px)',
+        boxShadow: '0 2px 4px rgb(0 0 0 / 0.05)'
       },
     });
 
@@ -143,17 +180,11 @@ data.moments.forEach((moment, mIndex) => {
       id: `e-${momentId}-${topicId}`,
       source: momentId,
       target: topicId,
-      type: 'default',
-      style: { stroke: '#cbd5e1' },
+      type: 'bezier',
+      style: { stroke: '#cbd5e1', strokeWidth: 1.5 },
     });
   });
-
-  currentX += X_SPACING;
 });
-
-// Center root node
-const totalWidth = currentX - X_SPACING;
-initialNodes[0].position.x = (totalWidth / 2) + 25; // Adjusting for visual center
 
 export default function MapaConceptualPage() {
   const [nodes, setNodes, onNodesChange] = useNodesState(initialNodes);
@@ -179,15 +210,14 @@ export default function MapaConceptualPage() {
               ...n.style,
               width: isExpanded ? 400 : 250,
               zIndex: isExpanded ? 1000 : 0,
-              boxShadow: isExpanded ? '0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1)' : 'none',
-              borderColor: isExpanded ? '#4338ca' : '#e2e8f0'
+              boxShadow: isExpanded ? '0 25px 50px -12px rgb(0 0 0 / 0.25)' : '0 2px 4px rgb(0 0 0 / 0.05)',
+              borderColor: isExpanded ? '#4f46e5' : '#cbd5e1',
+              background: isExpanded ? '#ffffff' : 'rgba(255, 255, 255, 0.95)'
             }
           };
         }
         
-        // Optional: Collapse others when one is clicked? 
-        // For now, let's keep others as they are, or collapse them to focus on one.
-        // Let's implement "Accordion" style: collapse all others.
+        // Collapse others when one is clicked (Accordion style)
         if (n.data.topicData && n.data.expanded) {
           return {
             ...n,
@@ -200,8 +230,9 @@ export default function MapaConceptualPage() {
               ...n.style,
               width: 250,
               zIndex: 0,
-              boxShadow: 'none',
-              borderColor: '#e2e8f0'
+              boxShadow: '0 2px 4px rgb(0 0 0 / 0.05)',
+              borderColor: '#cbd5e1',
+              background: 'rgba(255, 255, 255, 0.95)'
             }
           };
         }
@@ -227,8 +258,9 @@ export default function MapaConceptualPage() {
               ...n.style,
               width: 250,
               zIndex: 0,
-              boxShadow: 'none',
-              borderColor: '#e2e8f0'
+              boxShadow: '0 2px 4px rgb(0 0 0 / 0.05)',
+              borderColor: '#cbd5e1',
+              background: 'rgba(255, 255, 255, 0.95)'
             }
           };
         }
