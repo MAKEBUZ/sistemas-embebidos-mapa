@@ -24,6 +24,16 @@ const renderSummary = (topic: any) => (
 // Helper to render full content
 const renderFull = (topic: any) => (
    <div className="text-left p-3">
+    {topic.imageUrl && (
+      <div className="relative w-full h-32 mb-3 rounded-md overflow-hidden bg-gray-100">
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img 
+          src={topic.imageUrl} 
+          alt={topic.title}
+          className="w-full h-full object-cover"
+        />
+      </div>
+    )}
     <div className="font-bold text-lg text-brand-primary mb-2 border-b border-gray-100 pb-2">{topic.title}</div>
     <div className="text-sm text-gray-700 mb-4">{topic.definition}</div>
     

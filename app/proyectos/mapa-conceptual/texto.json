@@ -14,7 +14,8 @@
             "Respuesta en tiempo determinado",
             "Interacción directa con hardware"
           ],
-          "example": "Ejemplo: una lavadora automática que controla ciclos de lavado."
+          "example": "Ejemplo: una lavadora automática que controla ciclos de lavado.",
+          "imageUrl": "https://trbl-services.eu/wp-content/uploads/2021/06/embebido2.jpg"
         },
         {
           "title": "Arquitectura básica de microcontroladores",
@@ -26,7 +27,8 @@
             "Temporizadores e interrupciones",
             "Bajo consumo energético"
           ],
-          "example": "Ejemplo: microcontrolador Arduino UNO con CPU, RAM y periféricos integrados."
+          "example": "Ejemplo: microcontrolador Arduino UNO con CPU, RAM y periféricos integrados.",
+          "imageUrl": "https://cdn.mikroe.com/ebooks/img/37/2016/02/al-mundo-de-los-microcontroladores-chapter-03-fig3-3.gif"
         },
         {
           "title": "Tipos de memoria y periféricos",
@@ -37,7 +39,8 @@
             "Interfaces UART, SPI, I2C",
             "PWM y temporizadores"
           ],
-          "example": "Ejemplo: sensor de temperatura conectado por I2C."
+          "example": "Ejemplo: sensor de temperatura conectado por I2C.",
+          "imageUrl": "https://linuxemb.wikidot.com/local--files/tesis-c2/anatomy.png"
         },
         {
           "title": "Lenguajes de programación utilizados",
@@ -47,7 +50,8 @@
             "Lenguaje ensamblador de bajo nivel",
             "Control directo del hardware"
           ],
-          "example": "Ejemplo: programa en C para encender un LED."
+          "example": "Ejemplo: programa en C para encender un LED.",
+          "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/1/19/C_Logo.png"
         },
         {
           "title": "Ciclo de vida de desarrollo de sistemas",
@@ -59,7 +63,8 @@
             "Pruebas",
             "Mantenimiento"
           ],
-          "example": "Ejemplo: desarrollo de un termostato digital."
+          "example": "Ejemplo: desarrollo de un termostato digital.",
+          "imageUrl": "https://thumbnails.genially.com/5f518a29e747f35bc120122a/screenshots/07ab69b0-9522-4bd8-90b4-3b58f10b3496.jpg"
         }
       ]
     },
@@ -74,7 +79,8 @@
             "Cumplimiento de plazos",
             "Alta confiabilidad"
           ],
-          "example": "Ejemplo: sistema de frenos ABS."
+          "example": "Ejemplo: sistema de frenos ABS.",
+          "imageUrl": "https://sensoricx.com/wp-content/uploads/2023/02/embebidos5.png"
         },
         {
           "title": "Sistemas Operativos de Tiempo Real (RTOS)",
@@ -84,7 +90,8 @@
             "Baja latencia",
             "Gestión eficiente de tareas"
           ],
-          "example": "Ejemplo: FreeRTOS en un microcontrolador ESP32."
+          "example": "Ejemplo: FreeRTOS en un microcontrolador ESP32.",
+          "imageUrl": "https://cidei.net/wp-content/uploads/2024/10/Sistemas-Operativos-en-Tiempo-Real-RTOS.webp"
         },
         {
           "title": "Gestión de tareas y planificación",
@@ -94,7 +101,8 @@
             "Prioridades configurables",
             "Planificación preventiva"
           ],
-          "example": "Ejemplo: tarea de lectura de sensores con mayor prioridad."
+          "example": "Ejemplo: tarea de lectura de sensores con mayor prioridad.",
+          "imageUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ3Z-f_wDTZcuZ5oFNC0CJ8Y0-0cou9UUYFWA&s"
         },
         {
           "title": "Interrupciones y temporizadores",
@@ -104,7 +112,8 @@
             "Control preciso del tiempo",
             "Soporte para multitarea"
           ],
-          "example": "Ejemplo: interrupción por botón presionado."
+          "example": "Ejemplo: interrupción por botón presionado.",
+          "imageUrl": "https://controlautomaticoeducacion.com/wp-content/uploads/timers_Arduino.jpg"
         },
         {
           "title": "Sincronización y comunicación entre tareas",
@@ -114,7 +123,8 @@
             "Mutex",
             "Colas de mensajes"
           ],
-          "example": "Ejemplo: cola de mensajes entre tareas."
+          "example": "Ejemplo: cola de mensajes entre tareas.",
+          "imageUrl": "https://img.innovaciondigital360.com/wp-content/uploads/2023/08/23221330/computadora-cuantica-microsoft-1.jpg"
         }
       ]
     },
@@ -129,7 +139,8 @@
             "Resolución de problemas reales",
             "Uso de sensores y actuadores"
           ],
-          "example": "Ejemplo: sistema IoT de monitoreo ambiental."
+          "example": "Ejemplo: sistema IoT de monitoreo ambiental.",
+          "imageUrl": "https://www.incibe.es/sites/default/files/blog/sistemas_embedidos/grafica2es.png"
         },
         {
           "title": "Integración de sensores y actuadores",
@@ -139,7 +150,8 @@
             "Actuadores eléctricos y mecánicos",
             "Control automático"
           ],
-          "example": "Ejemplo: sensor de movimiento que activa un motor."
+          "example": "Ejemplo: sensor de movimiento que activa un motor.",
+          "imageUrl": "https://bookdown.org/alberto_brunete/intro_automatica/Figuras/sensores/introsensoractuador.png"
         },
         {
           "title": "Optimización de recursos y consumo energético",
@@ -149,7 +161,8 @@
             "Código eficiente",
             "Mayor duración de batería"
           ],
-          "example": "Ejemplo: uso de modo sleep en sensores IoT."
+          "example": "Ejemplo: uso de modo sleep en sensores IoT.",
+          "imageUrl": "https://sinpar.com.ar/app/uploads/2022/08/Eficiencia-energetica-scaled.jpg"
         },
         {
           "title": "Pruebas, validación y depuración",
@@ -159,7 +172,8 @@
             "Depuración de errores",
             "Simulación de fallos"
           ],
-          "example": "Ejemplo: uso de debugger para detectar fallos."
+          "example": "Ejemplo: uso de debugger para detectar fallos.",
+          "imageUrl": "https://www.parasoft.com/wp-content/uploads/2025/07/V-Model-Validation.png?v=new"
         },
         {
           "title": "Documentación técnica y presentación de proyectos",
@@ -169,7 +183,8 @@
             "Informes claros",
             "Presentación estructurada"
           ],
-          "example": "Ejemplo: manual técnico de un sistema embebido."
+          "example": "Ejemplo: manual técnico de un sistema embebido.",
+          "imageUrl": "https://document360.com/wp-content/uploads/2022/06/project_documentation_types-e1655203622242.png"
         }
       ]
     }
