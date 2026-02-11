@@ -1,0 +1,177 @@
+{
+  "title": "SISTEMAS EMBEBIDOS",
+  "moments": [
+    {
+      "title": "Momento 1 - Fundamentos de Sistemas Embebidos",
+      "topics": [
+        {
+          "title": "Definición y características de los sistemas embebidos",
+          "definition": "Un sistema embebido es un sistema computacional diseñado para realizar una función específica dentro de un sistema más grande.",
+          "characteristics": [
+            "Función específica",
+            "Recursos limitados",
+            "Alta confiabilidad",
+            "Respuesta en tiempo determinado",
+            "Interacción directa con hardware"
+          ],
+          "example": "Ejemplo: una lavadora automática que controla ciclos de lavado."
+        },
+        {
+          "title": "Arquitectura básica de microcontroladores",
+          "definition": "Describe la organización interna de la CPU, memorias y periféricos integrados en un solo chip.",
+          "characteristics": [
+            "CPU integrada",
+            "Memoria RAM y Flash",
+            "Puertos de entrada/salida",
+            "Temporizadores e interrupciones",
+            "Bajo consumo energético"
+          ],
+          "example": "Ejemplo: microcontrolador Arduino UNO con CPU, RAM y periféricos integrados."
+        },
+        {
+          "title": "Tipos de memoria y periféricos",
+          "definition": "Conjunto de memorias y dispositivos que permiten almacenar datos e interactuar con el entorno.",
+          "characteristics": [
+            "Memoria RAM, Flash y EEPROM",
+            "Periféricos ADC y DAC",
+            "Interfaces UART, SPI, I2C",
+            "PWM y temporizadores"
+          ],
+          "example": "Ejemplo: sensor de temperatura conectado por I2C."
+        },
+        {
+          "title": "Lenguajes de programación utilizados",
+          "definition": "Lenguajes empleados para programar y controlar directamente el hardware.",
+          "characteristics": [
+            "Lenguaje C portable y eficiente",
+            "Lenguaje ensamblador de bajo nivel",
+            "Control directo del hardware"
+          ],
+          "example": "Ejemplo: programa en C para encender un LED."
+        },
+        {
+          "title": "Ciclo de vida de desarrollo de sistemas",
+          "definition": "Etapas necesarias para diseñar, implementar y mantener un sistema embebido.",
+          "characteristics": [
+            "Análisis de requisitos",
+            "Diseño",
+            "Implementación",
+            "Pruebas",
+            "Mantenimiento"
+          ],
+          "example": "Ejemplo: desarrollo de un termostato digital."
+        }
+      ]
+    },
+    {
+      "title": "Momento 2 - Programación en Tiempo Real",
+      "topics": [
+        {
+          "title": "Concepto de tiempo real",
+          "definition": "Sistema donde la corrección depende del resultado y del tiempo de respuesta.",
+          "characteristics": [
+            "Respuesta determinística",
+            "Cumplimiento de plazos",
+            "Alta confiabilidad"
+          ],
+          "example": "Ejemplo: sistema de frenos ABS."
+        },
+        {
+          "title": "Sistemas Operativos de Tiempo Real (RTOS)",
+          "definition": "Sistema operativo diseñado para garantizar tiempos de respuesta predecibles.",
+          "characteristics": [
+            "Planificación por prioridades",
+            "Baja latencia",
+            "Gestión eficiente de tareas"
+          ],
+          "example": "Ejemplo: FreeRTOS en un microcontrolador ESP32."
+        },
+        {
+          "title": "Gestión de tareas y planificación",
+          "definition": "Organización de la ejecución de múltiples tareas.",
+          "characteristics": [
+            "Tareas independientes",
+            "Prioridades configurables",
+            "Planificación preventiva"
+          ],
+          "example": "Ejemplo: tarea de lectura de sensores con mayor prioridad."
+        },
+        {
+          "title": "Interrupciones y temporizadores",
+          "definition": "Mecanismos para responder a eventos y controlar el tiempo.",
+          "characteristics": [
+            "Respuesta inmediata",
+            "Control preciso del tiempo",
+            "Soporte para multitarea"
+          ],
+          "example": "Ejemplo: interrupción por botón presionado."
+        },
+        {
+          "title": "Sincronización y comunicación entre tareas",
+          "definition": "Mecanismos para compartir información de forma segura.",
+          "characteristics": [
+            "Semáforos",
+            "Mutex",
+            "Colas de mensajes"
+          ],
+          "example": "Ejemplo: cola de mensajes entre tareas."
+        }
+      ]
+    },
+    {
+      "title": "Momento 3 - Aplicaciones y Proyectos Integradores",
+      "topics": [
+        {
+          "title": "Diseño de sistemas embebidos aplicados",
+          "definition": "Aplicación práctica de sistemas embebidos en IoT, robótica y automatización.",
+          "characteristics": [
+            "Integración hardware-software",
+            "Resolución de problemas reales",
+            "Uso de sensores y actuadores"
+          ],
+          "example": "Ejemplo: sistema IoT de monitoreo ambiental."
+        },
+        {
+          "title": "Integración de sensores y actuadores",
+          "definition": "Proceso de capturar datos del entorno y ejecutar acciones.",
+          "characteristics": [
+            "Sensores analógicos y digitales",
+            "Actuadores eléctricos y mecánicos",
+            "Control automático"
+          ],
+          "example": "Ejemplo: sensor de movimiento que activa un motor."
+        },
+        {
+          "title": "Optimización de recursos y consumo energético",
+          "definition": "Técnicas para reducir uso de CPU, memoria y energía.",
+          "characteristics": [
+            "Bajo consumo",
+            "Código eficiente",
+            "Mayor duración de batería"
+          ],
+          "example": "Ejemplo: uso de modo sleep en sensores IoT."
+        },
+        {
+          "title": "Pruebas, validación y depuración",
+          "definition": "Proceso para verificar el correcto funcionamiento del sistema.",
+          "characteristics": [
+            "Pruebas funcionales",
+            "Depuración de errores",
+            "Simulación de fallos"
+          ],
+          "example": "Ejemplo: uso de debugger para detectar fallos."
+        },
+        {
+          "title": "Documentación técnica y presentación de proyectos",
+          "definition": "Registro y comunicación del desarrollo del sistema.",
+          "characteristics": [
+            "Diagramas técnicos",
+            "Informes claros",
+            "Presentación estructurada"
+          ],
+          "example": "Ejemplo: manual técnico de un sistema embebido."
+        }
+      ]
+    }
+  ]
+}
